@@ -16,7 +16,7 @@ class Brand extends Controller
     	if(request()->isPost()){
     		$data=input('post.');
 
-            if(stripos($data['brand_url'],'http://')===false){
+            if($data['brand_url']&&stripos($data['brand_url'],'http://')===false){
                 $data['brand_url'] = 'http://'.$data['brand_url'];
 
             }
@@ -24,6 +24,12 @@ class Brand extends Controller
     		if($_FILES['brand_img']['tmp_name']){
     			$data['brand_img']=$this->upload();
     		}
+
+            $validate = validate('brand');
+
+             if (!$validate->check($data)) {
+            $this->error($validate->getError());
+        }
     		$add=db('brand')->insert($data);
     		if($add){
     			$this->success('添加品牌成功！','lst');
@@ -37,9 +43,48 @@ class Brand extends Controller
 
     public function edit()
     {
+         if(request()->isPost()){
+            $data=input('post.');
+
+            // dump($data);die;
+
+            if($data['brand_url']&&stripos($data['brand_url'],'http://')===false){
+                $data['brand_url'] = 'http://'.$data['brand_url'];
+
+            }
+            //处理图片上传
+            if($_FILES['brand_img']['tmp_name']){
+
+                $oldBrands = db('brand')->field('brand_img')->find($data['id']);
+              // dump($oldBrands);die;
+             $old = UPLOADS.$oldBrands['brand_img'];
+             // dump($old);die;
+
+             if(file_exists($old)){
+
+                @unlink($old);
+             }
+             
+                $data['brand_img']=$this->upload();
+            }
+            $save = db('brand')->update($data);
+
+              $validate = validate('brand');
+
+             if (!$validate->check($data)) {
+            $this->error($validate->getError());
+        }
+
+            if($save){
+                $this->success('修改品牌成功！','lst');
+            }else{
+                $this->error('修改品牌失败！');
+            }
+            return;
+        }
         $id = input('id');
         $brands = db('brand')->find($id);
-        $this->assign('brands',$brands);
+          $this->assign('brands',$brands);
         return view();
     }
 
@@ -47,7 +92,7 @@ class Brand extends Controller
     {
         $res = db('brand')->delete($id);
       if($res){
-                $this->success('删除成功！','lst');
+                $this->success('删除成功！','lst',1);
             }else{
                 $this->error('删除失败！');
             }
