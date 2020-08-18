@@ -70,37 +70,29 @@
                             <tr>
                                 <th class="text-center">ID</th>
                                 <th class="text-center">分类名称</th>
-                                <th class="text-center">分类地址</th>
-                                <th class="text-center">分类LOGO</th>
-                                <th class="text-center">分类描述</th>
-                                <th class="text-center">分类状态</th>
+                                <th class="text-center">分类类型</th>
+                                <th class="text-center">显示到导航栏</th>
+                                <th class="text-center">排序</th>
+                          
                                 <th class="text-center">操作</th>
                             </tr>
                         </thead>
                         <tbody>
-                           {foreach $brands as  $key=>$value } 
+                           {foreach $cate as  $key=>$value } 
                                                         <tr>
                                 <td align="center">{$value['id']}</td>
-                                <td align="center">{$value['brand_name']}</td>
-                                <td align="center">{$value['brand_url']}</td>
+                                <td align="center">{$value['cate_name']}</td>
+                                <td align="center">{$value['cate_type']}</td>
                                 <td align="center">
-                              {if condition ="$value.brand_img neq ''"}
-                                      <img src="__uploads__/{$value.brand_img}" style="height: 40px">
+                              {if condition ="$value.show_nav eq 0"}
+                                      不显示
                               {else/}
-                                     暂无图片
+                                   显示
                               {/if}
 
                             </td>
                                 <td align="center">
-                                {$value['brand_description']|cut_str=###,4}</td>
-                                <td align="center">
-                                {if condition ="$value.status eq 1"}
-                                      <img src="__admin__/images/显示.png" style="height: 30px">
-                              {else/}
-                                     <img src="__admin__/images/隐藏.png" style="height: 30px">
-                              {/if}
-
-                            </td>
+                                {$value['sort']}</td>
                               
                                 <td align="center">
                                     <a href="{:url('edit',array('id'=>$value['id']))}')" class="btn btn-primary btn-sm shiny">
@@ -131,7 +123,7 @@
 	</div>
     <!-- 分类 -->
 <div style="padding-left:830px">
-      {$brands->render()}
+      {$cate->render()}
 </div>
 	    <!--Basic Scripts-->
     <script src="__admin__/style/jquery_002.js"></script>
