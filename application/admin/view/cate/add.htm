@@ -56,12 +56,15 @@
             </div>
             <div class="widget-body">
                 <div id="horizontal-form">
-                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" action="" method="post">
                        <div class="form-group">
                             <label for="username" class="col-sm-2 control-label no-padding-right">上级分类</label>
                             <div class="col-sm-6">
                                <select name="pid" style="width: 300px">
-                                   <option value="0"></option>
+                                   <option value="0">顶级分类</option>
+                                   {volist name="res" id="v"} 
+                                   <option value="{$v.id}">{$v.cate_name}</option>
+                                   {/volist}
                                </select>
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
@@ -80,13 +83,13 @@
                             <div class="col-sm-6">
                                 <div class="radio" style="float:left; padding-right:10px;">
                                     <label>
-                                        <input name="show_nav" value="1" class="colored-blue" checked="checked" type="radio">
+                                        <input name="show_nav" value="1" class="colored-blue" type="radio">
                                         <span class="text">是</span>
                                     </label>
                                 </div>
                                 <div class="radio" style="float:left;">
                                     <label>
-                                        <input name="show_nav" value="0" class="colored-blue" type="radio">
+                                        <input name="show_nav" value="0" class="colored-blue" checked="checked"  type="radio">
                                         <span class="text">否</span>
                                     </label>
                                 </div>
