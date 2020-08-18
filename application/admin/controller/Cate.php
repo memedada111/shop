@@ -5,9 +5,9 @@ class Cate extends Controller
 {
     public function lst()
     {
-        $brands = db('brand')->order('id desc')->paginate(10);
+        $cate = db('cate')->order('id desc')->paginate(10);
 
-        $this->assign('brands',$brands);
+        $this->assign('cate',$cate);
         return view('list');
     }
 
@@ -15,29 +15,20 @@ class Cate extends Controller
     {
     	if(request()->isPost()){
     		$data=input('post.');
-
-            if($data['brand_url']&&stripos($data['brand_url'],'http://')===false){
-                $data['brand_url'] = 'http://'.$data['brand_url'];
-
-            }
-    		//处理图片上传
-    		if($_FILES['brand_img']['tmp_name']){
-    			$data['brand_img']=$this->upload();
-    		}
-
-            $validate = validate('brand');
-
-             if (!$validate->check($data)) {
-            $this->error($validate->getError());
-        }
-    		$add=db('brand')->insert($data);
+    
+    		$add=db('cate')->insert($data);
     		if($add){
-    			$this->success('添加品牌成功！','lst');
+    			$this->success('添加分类成功！','lst');
     		}else{
-    			$this->error('添加品牌失败！');
+    			$this->error('添加分类失败！');
     		}
     		return;
     	}
+
+        $res = db('cate')->select();
+
+            $this->assign('res',$res);  
+
         return view();
     }
 
