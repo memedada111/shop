@@ -11,6 +11,24 @@
 
 // 应用公共文件
 
+
+
+//图片资源处理函数
+function my_scandir($dir=UEDITOR){
+   $files=array();
+   $dir_list=scandir($dir);
+   foreach ($dir_list as $file) {
+      if($file != '.' && $file != '..'){
+         if(is_dir($dir.'/'.$file)){
+            $files[$file]=my_scandir($dir.'/'.$file);
+         }else{
+            $files[]=$dir.'/'.$file;
+         }
+      }
+   }
+   return $files;
+}
+
 //字符串截取
 
 function cut_str($sourcestr,$cutlength)  
