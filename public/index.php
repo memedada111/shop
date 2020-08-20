@@ -13,6 +13,10 @@
 
 // 定义应用目录
 define('APP_PATH', __DIR__ . '/../application/');
-define('UPLOADS', __DIR__ . '/../public/static/uploads/');
+define('IMG_UPLOADS', __DIR__ . '/../public/static/uploads/');
+// 视频中ueditor中的图片上传到了www目录下，本项目上传到了public下
+define('UEDITOR', __DIR__ . '/ueditor');
+define('HTTP_UEDITOR','/ueditor');
+define('DEL_UEDITOR',__DIR__ . '/../public');
 // 加载框架引导文件
 require __DIR__ . '/../thinkphp/start.php';
