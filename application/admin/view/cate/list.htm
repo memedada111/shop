@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head>
-	    <meta charset="utf-8">
-    <title>么</title>
+        <meta charset="utf-8">
+    <title>shop</title>
 
     <meta name="description" content="Dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,14 +20,14 @@
     
 </head>
 <body>
-	<!-- 头部 -->
-	{include file="common/top"}
+    <!-- 头部 -->
+    {include file="common/top"}
 
-	<!-- /头部 -->
-	
-	<div class="main-container container-fluid">
-		<div class="page-container">
-			            <!-- Page Sidebar -->
+    <!-- /头部 -->
+    
+    <div class="main-container container-fluid">
+        <div class="page-container">
+                        <!-- Page Sidebar -->
             <div class="page-sidebar" id="sidebar">
                 <!-- Page Sidebar Header-->
                 <div class="sidebar-header-wrapper">
@@ -65,6 +65,7 @@
         <div class="widget">
             <div class="widget-body">
                 <div class="flip-scroll">
+                    <form method="post">
                     <table class="table table-bordered table-hover">
                         <thead class="">
                             <tr>
@@ -78,10 +79,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                           {foreach $cate as  $key=>$value } 
+                           {foreach $cateRes as  $key=>$value } 
                                                         <tr>
                                 <td align="center">{$value['id']}</td>
-                                <td align="center">{$value['cate_name']}</td>
+                                <td><?php 
+                                  echo str_repeat('--------',$value['level'])?>
+
+                                {$value['cate_name']}</td>
                                 <td align="center">{$value['cate_type']}</td>
                                 <td align="center">
                               {if condition ="$value.show_nav eq 0"}
@@ -92,7 +96,7 @@
 
                             </td>
                                 <td align="center">
-                                {$value['sort']}</td>
+                               <input type="text" name="sort[{$value['id']}]" value="{$value['sort']}"> </td>
                               
                                 <td align="center">
                                     <a href="{:url('edit',array('id'=>$value['id']))}')" class="btn btn-primary btn-sm shiny">
@@ -104,11 +108,15 @@
                                 </td>
                             </tr>
                             {/foreach}
+                            <tr>
+                                <input type="submit" name="" value="排序"  style="">
+                            </tr>
                         </tbody>
                     </table>
+                    </form>
                 </div>
                 <div>
-                	                </div>
+                                    </div>
             </div>
         </div>
     </div>
@@ -119,13 +127,11 @@
             </div>
 
             <!-- /Page Content -->
-		</div>	
-	</div>
+        </div>  
+    </div>
     <!-- 分类 -->
-<div style="padding-left:830px">
-      {$cate->render()}
-</div>
-	    <!--Basic Scripts-->
+
+        <!--Basic Scripts-->
     <script src="__admin__/style/jquery_002.js"></script>
     <script src="__admin__/style/bootstrap.js"></script>
     <script src="__admin__/style/jquery.js"></script>
