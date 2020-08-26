@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head>
 	    <meta charset="utf-8">
-    <title>么</title>
+    <title>文章分类新增</title>
 
     <meta name="description" content="Dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
                         <a href="{:url('index/index')}">系统</a>
                     </li>
                                         <li>
-                        <a href="{:url('Brand/lst')}">分类列表</a>
+                        <a href="{:url('Cate/lst')}">分类列表</a>
                     </li>
                                         <li class="active">添加分类</li>
                                         </ul>
@@ -62,8 +62,9 @@
                             <div class="col-sm-6">
                                <select name="pid" style="width: 300px">
                                    <option value="0">顶级分类</option>
-                                   {volist name="res" id="v"} 
-                                   <option value="{$v.id}">{$v.cate_name}</option>
+                                   {volist name="cateRes" id="v"} 
+                                   <option {if condition="$v.allow_son eq 0"} disabled="disabled" {/if} value="{$v.id}"><?php 
+                                  echo str_repeat('--------',$v['level'])?>{$v.cate_name}</option>
                                    {/volist}
                                </select>
                             </div>
