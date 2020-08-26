@@ -57,7 +57,7 @@ class Brand extends Controller
 
                 $oldBrands = db('brand')->field('brand_img')->find($data['id']);
               // dump($oldBrands);die;
-             $old = UPLOADS.$oldBrands['brand_img'];
+             $old = IMG_UPLOADS.$oldBrands['brand_img'];
              // dump($old);die;
 
              if(file_exists($old)){
