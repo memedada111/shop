@@ -3,6 +3,25 @@ namespace app\admin\controller;
 use think\Controller;
 class Conf extends Controller
 {
+    
+   public function search(){
+
+        //    if(request()->isPost()){
+        //     $data=input('post.');
+           
+        //  // var_dump($dres);die;
+            
+        // }
+          $data=input('post.');
+         $dres=db('conf')->where(['cname'=>$data['sear']])->select();
+           $this->assign([
+            'dres'=>$dres,
+            ]);
+        return view('list');
+
+   }
+
+
     public function conflist(){
         $conf=db('conf');
         if(request()->isPost()){
