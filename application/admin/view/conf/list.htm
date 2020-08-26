@@ -52,18 +52,26 @@
         <div class="widget">
             <div class="widget-body">
                 <div class="flip-scroll">
+                    <div>
+                        <form method="post" action="{:url('conf/search')}">
+                             <input type="text" placeholder="英文名称/中文名称" name="sear">
+                        <input type="submit" name="ss" value="搜索">
+                        </form>
+                       
+                    </div>
+                  
                     <form method="post" action="">
                         <table class="table table-bordered table-hover">
                             <thead class="">
                                 <tr>
                                     <th class="text-center" width="4%">ID</th>
                                     <th class="text-center" width="8%">英文名称</th>
-                                    <th width="10%">中文名称</th>
+                                    <th class="text-center" width="10%">中文名称</th>
                                     <th class="text-center" width="8%">表单类型</th>
                                     <th class="text-center" width="8%">配置类型</th>
                                     <th class="text-center">默认值</th>
-                                    <th>可选值</th>
-                                    <th>排序</th>
+                                    <th class="text-center">可选值</th>
+                                    <th class="text-center">排序</th>
                                     <th class="text-center" width="12%">操作</th>
                                 </tr>
                             </thead>
